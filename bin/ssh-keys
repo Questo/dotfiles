@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+keys=(~/.ssh/*.pub)
+
+if [[ ! -e "${keys[0]}" ]]; then
+  echo "No public SSH keys found in ~/.ssh"
+  exit 1
+fi
+
+key_names=("${keys[@]##*/}")
+
+echo "Select an SSH public key:"
+select key_name in "${key_names[@]}"; do
+  [[ -n "${key_name}" ]] || {
+    echo "Invalid selection"
+    continue
+  }
+
+  key_path="${keys[$((REPLY - 1))]}"
+
+  echo
+  cat "$key_path"
+  cat "$key_path" | xsel --clipboard --input
+  echo
+  echo "(Copied to clipboard)"
+
+  break
+done
