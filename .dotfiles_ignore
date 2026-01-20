@@ -1,0 +1,28 @@
+# OS / desktop
+.DS_Store
+Thumbs.db
+
+# Shell history
+.zsh_history
+.bash_history
+
+# Caches
+.cache/
+.local/share/Trash/
+.npm/
+.pnpm-store/
+.node-gyp/
+
+# SSH keys - do not track
+.ssh/id_*
+.ssh/known_hosts
+.ssh/authorized_keys
+
+# Sensitive configs (example)
+.aws/
+.azure/
+.kube/
+
+# Editor/IDE
+.vscode/
+.idea/
