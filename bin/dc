@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cmd="${1:-}"
+shift || true
+
+case "$cmd" in
+down) exec docker compose down "$@" ;;
+downv) exec docker compose down -v "$@" ;;
+up) exec docker compose up --build -d "$@" ;;
+build) exec docker compose build "$@" ;;
+buildnc) exec docker compose build --no-cache "$@" ;;
+*)
+  echo "Usage: dc {down|downv|up|build|buildnc}" >&2
+  exit 2
+  ;;
+esac
