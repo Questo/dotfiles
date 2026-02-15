@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+dl() {
+  local name="$1"
+
+  while true; do
+    if docker ps -a --format '{{.Names}}' | grep -q "^${name}$"; then
+      echo "Container found. Attaching..."
+      docker logs -f "$name"
+      echo "Container stopped or removed. Waiting..."
+    fi
+    sleep 2
+  done
+}
+
+dl "$@"
