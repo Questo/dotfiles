@@ -2,14 +2,44 @@
 set -euo pipefail
 
 dl() {
-  local name="$1"
+  local name="${1:?usage: dl <container-name>}"
+  local state=""
 
   while true; do
-    if docker ps -a --format '{{.Names}}' | grep -q "^${name}$"; then
-      echo "Container found. Attaching..."
-      docker logs -f "$name"
-      echo "Container stopped or removed. Waiting..."
+    # Does it exist?
+    if ! docker ps -a --format '{{.Names}}' | grep -Fxq "$name"; then
+      if [[ "$state" != "missing" ]]; then
+        echo " Container '$name' not found. Waiting..."
+        state="missing"
+      fi
+      sleep 2
+      continue
     fi
+
+    # Is it running?
+    if ! docker ps --format '{{.Names}}' | grep -Fxq "$name"; then
+      if [[ "$state" != "stopped" ]]; then
+        echo " Container '$name' exists but is not running. Waiting..."
+        state="stopped"
+      fi
+      sleep 2
+      continue
+    fi
+
+    # Running: attach once, and only re-attach after it stops/removes.
+    if [[ "$state" != "running" ]]; then
+      echo " Container '$name' is running. Attaching to logs..."
+      echo ""
+      state="running"
+    fi
+
+    # This blocks until the container stops or is removed.
+    docker logs -f "$name" || true
+
+    # When we get here, stream ended (stop/remove); loop will wait.
+    state="stopped"
+    echo ""
+    echo " Log stream ended for '$name'. Waiting for it to run again..."
     sleep 2
   done
 }
