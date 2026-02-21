@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode="$(gsettings get org.gnome.desktop.interface color-scheme | tr -d "'")"
+
+THEME_DIR="$HOME/.config/alacritty/themes"
+MAIN_CFG="$HOME/.config/alacritty/alacritty.toml"
+
+ZELLIJ_CFG="$HOME/.config/zellij/config.kdl"
+
+if [[ "$mode" == "prefer-dark" ]]; then
+  # Alacritty
+  ln -sf "$THEME_DIR/frappe.toml" "$THEME_DIR/current.toml"
+
+  # Zellij: set theme to catppuccin-frappe (only the non-commented theme line)
+  sed -i.bak -E 's/^([[:space:]]*theme[[:space:]]+)"catppuccin-(latte|frappe)"/\1"catppuccin-frappe"/' "$ZELLIJ_CFG"
+else
+  # Alacritty
+  ln -sf "$THEME_DIR/latte.toml" "$THEME_DIR/current.toml"
+
+  # Zellij: set theme to catppuccin-latte (only the non-commented theme line)
+  sed -i.bak -E 's/^([[:space:]]*theme[[:space:]]+)"catppuccin-(latte|frappe)"/\1"catppuccin-latte"/' "$ZELLIJ_CFG"
+fi
+
+# Trigger Alacritty live reload safely
+touch "$MAIN_CFG"

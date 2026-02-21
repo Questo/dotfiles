@@ -1,3 +1,6 @@
+[general]
+import = ["~/.config/alacritty/themes/current.toml"]
+
 [window]
 padding = { x = 4, y = 4 }
 opacity = 0.9
@@ -9,3 +12,4 @@ italic = { family = "FiraCode Nerd Font", style = "Italic" }
 bold_italic = { family = "FiraCode Nerd Font", style = "Bold Italic" }
 
 size = 10.0
+
