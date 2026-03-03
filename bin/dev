@@ -1,0 +1,18 @@
+# #!/usr/bin/env bash
+# set -euo pipefail
+
+# SESSION="${1:-pekdon}"
+
+# if zellij list-sessions 2>/dev/null | grep -Eq "^${SESSION}(\s|$)"; then
+#   exec zellij attach "$SESSION"
+# else
+#   exec zellij --new-session-with-layout dev --session "$SESSION"
+# fi
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+project="${1:-$(basename "$PWD")}"
+
+zellij attach "$project" 2>/dev/null \
+  || zellij --new-session-with-layout dev --session "$project"
