@@ -11,7 +11,7 @@ layout {
     }
   }
 
-  tab name="RUN" {
+  tab name="SHELL" {
     pane
   }
 
@@ -23,8 +23,8 @@ layout {
     pane command="lazygit"
   }
 
-  tab name="SHELL" {
-    pane
+  tab name="CLAUDE" {
+    pane command="claude"
   }
 
   tab name="MONITOR" {

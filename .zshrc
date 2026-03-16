@@ -116,7 +116,7 @@ esac
 # pnpm end
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
 
 alias dot="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
