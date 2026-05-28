@@ -15,12 +15,12 @@ layout {
     pane
   }
 
-  tab name="LOGS" {
-    pane
-  }
-
   tab name="GIT" {
     pane command="lazygit"
+  }
+
+  tab name="DOCKER" {
+    pane command="lazydocker"
   }
 
   tab name="CLAUDE" {
