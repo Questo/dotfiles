@@ -117,6 +117,19 @@ esac
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+# .NET SDK (installed via dotnet-install.sh into ~/.dotnet; takes precedence over Fedora's system package)
+export DOTNET_ROOT="$HOME/.dotnet"
+case ":$PATH:" in
+  *":$DOTNET_ROOT:"*) ;;
+  *) export PATH="$DOTNET_ROOT:$PATH" ;;
+esac
+# .NET end
+
 export EDITOR="nvim"
 
 alias dot="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias poe_trade="XDG_SESSION_TYPE=x11 ./Awakened-PoE-Trade-3.28.103.AppImage"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
