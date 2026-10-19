@@ -1,0 +1,14 @@
+#!/bin/sh
+# GNOME's "Light" style sets color-scheme to 'default' (no preference), which
+# Ghostty ignores. Rewrite it to an explicit 'prefer-light' whenever it appears.
+#
+# Run it as a systemd user service (unit: ~/.config/systemd/user/color-scheme-fix.service):
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now color-scheme-fix
+# Disable with: systemctl --user disable --now color-scheme-fix
+fix() {
+    [ "$(gsettings get org.gnome.desktop.interface color-scheme)" = "'default'" ] &&
+        gsettings set org.gnome.desktop.interface color-scheme prefer-light
+}
+fix
+gsettings monitor org.gnome.desktop.interface color-scheme | while read -r _; do fix; done
