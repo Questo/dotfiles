@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Apply once at startup so we match the current state immediately,
+# then react to every color-scheme change for the life of the process.
+"$HOME/bin/switch-theme" || true
+
+gsettings monitor org.gnome.desktop.interface color-scheme | while read -r _; do
+  "$HOME/bin/switch-theme" || true
+done

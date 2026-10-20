@@ -1,0 +1,30 @@
+// GitHub themes matching Ghostty's "GitHub Light Default" / "GitHub Dark".
+// ~/bin/switch-theme flips the `theme` line in config.kdl between these two.
+themes {
+    github-light {
+        fg "#1f2328"
+        bg "#d0d7de"
+        black "#f6f8fa"
+        red "#cf222e"
+        green "#116329"
+        yellow "#9a6700"
+        blue "#0969da"
+        magenta "#8250df"
+        cyan "#1b7c83"
+        white "#24292f"
+        orange "#bc4c00"
+    }
+    github-dark {
+        fg "#c9d1d9"
+        bg "#3b5070"
+        black "#101216"
+        red "#f78166"
+        green "#56d364"
+        yellow "#e3b341"
+        blue "#6ca4f8"
+        magenta "#db61a2"
+        cyan "#2b7489"
+        white "#c9d1d9"
+        orange "#ffa657"
+    }
+}

@@ -1,0 +1,13 @@
+[Unit]
+Description=Follow GNOME color-scheme and sync the Zellij theme
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/bin/theme-watcher
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=graphical-session.target
