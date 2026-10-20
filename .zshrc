@@ -124,12 +124,17 @@ case ":$PATH:" in
   *":$DOTNET_ROOT:"*) ;;
   *) export PATH="$DOTNET_ROOT:$PATH" ;;
 esac
+case ":$PATH:" in
+  *":$DOTNET_ROOT/tools:"*) ;;
+  *) export PATH="$DOTNET_ROOT/tools:$PATH" ;;
+esac
 # .NET end
 
 export EDITOR="nvim"
 
 alias dot="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias poe_trade="XDG_SESSION_TYPE=x11 ./Awakened-PoE-Trade-3.28.103.AppImage"
+alias killspotify="pkill -9 -f '/snap/spotify/.*/spotify'"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
