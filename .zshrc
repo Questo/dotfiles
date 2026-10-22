@@ -138,3 +138,12 @@ alias killspotify="pkill -9 -f '/snap/spotify/.*/spotify'"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+# gh/glow markdown rendering: auto-detection is unreliable in ghostty, so pick
+# the glamour style from the GNOME color scheme at call time (ghostty follows it)
+_glamour_style() {
+  [[ "$(gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null)" == *dark* ]] \
+    && echo dark || echo light
+}
+gh()   { GLAMOUR_STYLE=$(_glamour_style) command gh "$@"; }
+glow() { GLAMOUR_STYLE=$(_glamour_style) command glow "$@"; }

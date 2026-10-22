@@ -1,2 +1,3 @@
-theme = light:GitHub Light Default,dark:GitHub Dark
-background-opacity = 0.9
+# Custom themes in ./themes/ wrap the GitHub themes and set per-scheme opacity
+# (light: 0.45, dark: 0.9) since background-opacity has no light:/dark: syntax.
+theme = light:github-light-transparent,dark:github-dark-transparent
