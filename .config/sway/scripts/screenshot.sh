@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# screenshot.sh area|full  -> saves to ~/pictures/Screenshots and copies to clipboard
+# screenshot.sh area|full  -> saves to ~/downloads/screenshots and copies to clipboard
 # area: drag to select a region, or click a window to capture it
-dir="$(xdg-user-dir PICTURES 2>/dev/null || echo "$HOME/Pictures")/Screenshots"
+dir="$(xdg-user-dir DOWNLOAD 2>/dev/null || echo "$HOME/downloads")/screenshots"
 mkdir -p "$dir"
 file="$dir/$(date +%Y-%m-%d_%H-%M-%S).png"
 

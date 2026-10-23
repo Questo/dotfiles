@@ -21,7 +21,7 @@ set $menu pkill -x wofi || wofi --show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/media/pictures/astronaut-jellyfish-space-digital-art-uhdpaper.com-4K-107.jpg fill
+output * bg ~/personal/pictures/astronaut-jellyfish-space-digital-art-uhdpaper.com-4K-107.jpg fill
 #
 # Example configuration:
 #
