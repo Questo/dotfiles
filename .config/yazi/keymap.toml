@@ -1,0 +1,4 @@
+[mgr]
+prepend_keymap = [
+	{ on = "<C-o>", run = "quit", desc = "Quit and cd the shell into the current directory" },
+]

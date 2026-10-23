@@ -1,0 +1,282 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 8,
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "group/player"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "tray",
+        "cpu",
+        "group/connectivity",
+        "group/media",
+        "group/energy",
+        "group/session"
+    ],
+
+    "group/connectivity": {
+        "orientation": "inherit",
+        "modules": [
+            "network",
+            "custom/vpn",
+            "bluetooth"
+        ]
+    },
+    "group/media": {
+        "orientation": "inherit",
+        "modules": [
+            "wireplumber",
+            "backlight"
+        ]
+    },
+    "group/energy": {
+        "orientation": "inherit",
+        "modules": [
+            "power-profiles-daemon",
+            "battery"
+        ]
+    },
+    "group/session": {
+        "orientation": "inherit",
+        "modules": [
+            "custom/screenshot",
+            "idle_inhibitor",
+            "custom/notifications",
+            "clock",
+            "custom/power"
+        ]
+    },
+    "group/player": {
+        "orientation": "inherit",
+        "modules": [
+            "mpris",
+            "custom/spotify-toggle",
+            "custom/spotify-next"
+        ]
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true
+    },
+    "sway/mode": {
+        "format": "  {}"
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8,
+        "show-passive-items": true
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "󰻠  {icon} {usage:>2}%",
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ],
+        "states": {
+            "warning": 60,
+            "critical": 85
+        },
+        "tooltip-format": "CPU {usage}% · load {load:.2f} · {avg_frequency} GHz",
+        "on-click": "ghostty -e btop"
+    },
+
+    "network": {
+        "interface": "wlp0s20f3",
+        "interval": 5,
+        "format-wifi": "{icon}  {essid}",
+        "format-ethernet": "󰈀  {ifname}",
+        "format-disconnected": "󰤮  Offline",
+        "format-disabled": "󰤭  Off",
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr} via {gwaddr}\n⇣ {bandwidthDownBytes}  ⇡ {bandwidthUpBytes}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+        "on-click-right": "nm-connection-editor"
+    },
+    "custom/vpn": {
+        "exec": "~/.config/waybar/scripts/vpn-status.sh",
+        "return-type": "json",
+        "interval": 5,
+        "signal": 8,
+        "on-click": "~/.config/waybar/scripts/vpn-menu.sh",
+        "on-click-right": "nm-connection-editor"
+    },
+    "bluetooth": {
+        "format": "󰂯",
+        "format-off": "󰂲",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂱",
+        "format-connected-battery": "󰂱 {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}: {status}",
+        "tooltip-format-off": "Bluetooth off",
+        "tooltip-format-connected": "{controller_alias}: {num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}  {device_battery_percentage}%",
+        "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+        "on-click-right": "~/.config/waybar/scripts/bluetooth-toggle.sh"
+    },
+
+    "wireplumber": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "format-icons": [
+            "󰕿",
+            "󰖀",
+            "󰕾"
+        ],
+        "max-volume": 100,
+        "scroll-step": 5,
+        "tooltip-format": "{node_name}: {volume}%",
+        "on-click": "~/.config/sway/scripts/volume.sh mute"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}  {percent}%",
+        "format-icons": [
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ],
+        "scroll-step": 5,
+        "tooltip": false
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}\nDriver: {driver}\nClick to cycle",
+        "format-icons": {
+            "default": "󰓅",
+            "performance": "󰓅",
+            "balanced": "",
+            "power-saver": ""
+        }
+    },
+    "battery": {
+        "bat": "BAT0",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "󰂄  {capacity}%",
+        "format-plugged": "󰚥  {capacity}%",
+        "format-full": "󰁹  Full",
+        "format-icons": [
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ],
+        "tooltip-format": "{timeTo} · {power:.1f} W",
+        "on-click": "~/.config/waybar/scripts/power-profile-menu.sh"
+    },
+
+    "custom/screenshot": {
+        "format": "󰄄",
+        "tooltip-format": "Screenshot\nLeft: area / click a window\nRight: full screen",
+        "on-click": "~/.config/sway/scripts/screenshot.sh area",
+        "on-click-right": "~/.config/sway/scripts/screenshot.sh full"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰈈",
+            "deactivated": "󰈉"
+        },
+        "tooltip-format-activated": "Auto-lock paused (screen stays on)\nLeft: resume auto-lock\nRight: lock now",
+        "tooltip-format-deactivated": "Auto-lock on (5 min)\nLeft: pause auto-lock\nRight: lock now",
+        "on-click-right": "swaylock -f"
+    },
+
+    "custom/notifications": {
+        "exec": "~/.config/waybar/scripts/notifications.sh",
+        "return-type": "json",
+        "interval": 2,
+        "signal": 9,
+        "on-click": "~/.config/waybar/scripts/notifications.sh menu",
+        "on-click-middle": "~/.config/waybar/scripts/notifications.sh clear",
+        "on-click-right": "~/.config/waybar/scripts/notifications.sh dnd"
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "󰥔  {:%H:%M:%S}",
+        "format-alt": "󰃭  {:%a %d %b %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "weeks-pos": "left",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#cba6f7'><b>{}</b></span>",
+                "weeks": "<span color='#94e2d5'><b>v{}</b></span>",
+                "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+                "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        },
+        "locale": "sv_SE.UTF-8"
+    },
+
+    "mpris": {
+        "player": "spotify",
+        "format": "{player_icon}  {dynamic}",
+        "player-icons": {
+            "default": "󰓇"
+        },
+        "dynamic-order": [
+            "artist",
+            "title"
+        ],
+        "dynamic-separator": " – ",
+        "dynamic-len": 45,
+        "tooltip-format": "{title}\n{artist}\n{album}\n\nClick: open Spotify · Middle: previous",
+        "on-click": "swaymsg '[app_id=\"spotify\"] focus'",
+        "on-click-right": "playerctl -p spotify next"
+    },
+    "custom/spotify-toggle": {
+        "exec": "~/.config/waybar/scripts/spotify-button.sh toggle",
+        "return-type": "json",
+        "on-click": "playerctl -p spotify play-pause"
+    },
+    "custom/spotify-next": {
+        "exec": "~/.config/waybar/scripts/spotify-button.sh next",
+        "return-type": "json",
+        "on-click": "playerctl -p spotify next"
+    },
+
+    "custom/power": {
+        "format": "󰐥",
+        "tooltip-format": "Lock · Suspend · Log out · Restart · Shut down",
+        "on-click": "~/.config/waybar/scripts/power-menu.sh"
+    }
+}

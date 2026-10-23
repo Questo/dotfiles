@@ -1,0 +1,13 @@
+show=drun
+width=600
+height=420
+location=center
+prompt=Search apps...
+allow_images=true
+image_size=28
+insensitive=true
+matching=fuzzy
+no_actions=true
+gtk_dark=true
+term=ghostty
+key_expand=Tab

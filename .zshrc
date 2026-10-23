@@ -147,3 +147,14 @@ _glamour_style() {
 }
 gh()   { GLAMOUR_STYLE=$(_glamour_style) command gh "$@"; }
 glow() { GLAMOUR_STYLE=$(_glamour_style) command glow "$@"; }
+
+# yazi: cd into yazi's last directory on quit (Ctrl+O / q; Q quits without cd)
+yazi() {
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
+}
+alias y=yazi

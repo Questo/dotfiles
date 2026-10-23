@@ -1,0 +1,201 @@
+/* Catppuccin Mocha-ish
+ * Layout: each island (standalone module or group) is one rounded pill;
+ * modules inside a group share the pill and only get padding. */
+@define-color base     #1e1e2e;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color overlay0 #6c7086;
+@define-color text     #cdd6f4;
+@define-color blue     #89b4fa;
+@define-color sapphire #74c7ec;
+@define-color teal     #94e2d5;
+@define-color green    #a6e3a1;
+@define-color yellow   #f9e2af;
+@define-color peach    #fab387;
+@define-color red      #f38ba8;
+@define-color mauve    #cba6f7;
+@define-color pink     #f5c2e7;
+
+* {
+    font-family: "FiraCode Nerd Font Propo", "Font Awesome 6 Free", sans-serif;
+    font-size: 16px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: alpha(@base, 0.85);
+    color: @text;
+}
+
+tooltip {
+    background: @base;
+    border: 1px solid @surface1;
+    border-radius: 8px;
+}
+
+/* ---------- Left: workspaces ---------- */
+#workspaces {
+    margin: 4px 0 4px 6px;
+    padding: 0 4px;
+    border-radius: 10px;
+    background: @surface0;
+}
+#workspaces button {
+    padding: 0 8px;
+    color: @overlay0;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    margin: 3px 0;
+}
+#workspaces button.focused {
+    color: @base;
+    background: @blue;
+}
+#workspaces button.urgent { color: @red; }
+#workspaces button:hover {
+    background: alpha(@text, 0.1);
+    box-shadow: none;
+}
+
+#mode {
+    margin: 4px 0 4px 6px;
+    padding: 0 10px;
+    border-radius: 10px;
+    color: @base;
+    background: @yellow;
+}
+
+/* ---------- Right: islands ---------- */
+#tray,
+#cpu,
+#connectivity,
+#media,
+#energy,
+#session {
+    margin: 4px 0;
+    padding: 0 4px;
+    border-radius: 10px;
+    background: @surface0;
+}
+#session { margin-right: 6px; }
+
+/* modules inside islands */
+#network,
+#custom-vpn,
+#bluetooth,
+#wireplumber,
+#backlight,
+#power-profiles-daemon,
+#battery,
+#custom-screenshot,
+#idle_inhibitor,
+#custom-notifications,
+#clock,
+#custom-power {
+    padding: 0 8px;
+    margin: 3px 0;
+    border-radius: 8px;
+}
+#cpu  { padding: 0 12px; min-width: 70px; }
+#tray { padding: 0 10px; }
+
+/* hover feedback on clickable modules */
+#network:hover,
+#custom-vpn:hover,
+#bluetooth:hover,
+#wireplumber:hover,
+#backlight:hover,
+#power-profiles-daemon:hover,
+#battery:hover,
+#custom-screenshot:hover,
+#idle_inhibitor:hover,
+#custom-notifications:hover,
+#clock:hover,
+#custom-power:hover {
+    background: alpha(@text, 0.08);
+}
+
+/* tray */
+#tray.empty { background: transparent; padding: 0; margin: 0; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
+    border-radius: 6px;
+}
+#tray menu {
+    background: @base;
+    color: @text;
+    border: 1px solid @surface1;
+    border-radius: 8px;
+    padding: 4px;
+}
+#tray menu menuitem:hover {
+    background: @surface1;
+    border-radius: 6px;
+}
+
+/* system */
+#cpu          { color: @teal; }
+#cpu.warning  { color: @yellow; }
+#cpu.critical { color: @base; background: @red; }
+
+/* connectivity */
+#network { color: @mauve; }
+#network.disconnected,
+#network.disabled { color: @overlay0; }
+#custom-vpn { color: @overlay0; }
+#custom-vpn.connected { color: @green; }
+#bluetooth { color: @blue; }
+#bluetooth.off,
+#bluetooth.disabled { color: @overlay0; }
+#bluetooth.connected { color: @sapphire; }
+
+/* media */
+#wireplumber { color: @peach; }
+#wireplumber.muted { color: @overlay0; }
+#backlight { color: @yellow; }
+
+/* energy */
+#power-profiles-daemon.performance { color: @red; }
+#power-profiles-daemon.balanced    { color: @blue; }
+#power-profiles-daemon.power-saver { color: @green; }
+#battery { color: @green; }
+#battery.charging { color: @yellow; }   /* energy flowing in */
+#battery.plugged  { color: @teal; }     /* on AC, held by charge limit */
+#battery.warning:not(.charging) { color: @yellow; }
+#battery.critical:not(.charging) {
+    color: @base;
+    background: @red;
+    animation: blink 1s steps(2) infinite;
+}
+@keyframes blink {
+    to { background: transparent; color: @red; }
+}
+
+/* session */
+#custom-screenshot { color: @pink; }
+#idle_inhibitor { color: @overlay0; }
+#idle_inhibitor.activated { color: @base; background: @yellow; }
+#custom-notifications { color: @overlay0; }
+#custom-notifications.unread { color: @peach; }
+#custom-notifications.dnd { color: @base; background: @red; }
+#clock { color: @blue; font-weight: bold; }
+#custom-power { color: @red; padding: 0 10px; }
+
+/* player (center): pill drawn on the modules themselves so it
+ * disappears completely when Spotify isn't running */
+#mpris,
+#custom-spotify-toggle,
+#custom-spotify-next {
+    margin: 4px 0;
+    padding: 0 8px;
+    background: @surface0;
+}
+#mpris { margin-left: 8px; padding-left: 14px; border-radius: 10px 0 0 10px; color: @green; }
+#mpris.paused { color: @overlay0; }
+#custom-spotify-toggle { color: @text; }
+#custom-spotify-next { padding-right: 14px; border-radius: 0 10px 10px 0; color: @text; }
+#custom-spotify-toggle:hover,
+#custom-spotify-next:hover { color: @green; }
