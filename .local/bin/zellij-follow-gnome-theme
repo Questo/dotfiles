@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Keep Zellij's theme in sync with the GNOME light/dark preference by rewriting
+# the `theme` line in config.kdl (Zellij live-reloads its config).
+set -euo pipefail
+
+config="${XDG_CONFIG_HOME:-$HOME/.config}/zellij/config.kdl"
+
+apply() {
+  local theme=github-light
+  [[ $1 == *prefer-dark* ]] && theme=github-dark
+  grep -q "^theme \"$theme\"$" "$config" || sed -i "s/^theme \".*\"$/theme \"$theme\"/" "$config"
+}
+
+apply "$(gsettings get org.gnome.desktop.interface color-scheme)"
+gsettings monitor org.gnome.desktop.interface color-scheme | while read -r line; do
+  apply "$line"
+done

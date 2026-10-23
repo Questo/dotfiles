@@ -1,0 +1,121 @@
+// GitHub dark theme, colors matching the Ghostty github-*-transparent themes.
+themes {
+    github-dark {
+        text_unselected {
+            base 201 209 217
+            background 22 27 34
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        text_selected {
+            base 201 209 217
+            background 48 54 61
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        ribbon_selected {
+            base 22 27 34
+            background 86 211 100
+            emphasis_0 247 129 102
+            emphasis_1 240 136 62
+            emphasis_2 219 97 162
+            emphasis_3 108 164 248
+        }
+        ribbon_unselected {
+            base 22 27 34
+            background 139 148 158
+            emphasis_0 247 129 102
+            emphasis_1 201 209 217
+            emphasis_2 108 164 248
+            emphasis_3 219 97 162
+        }
+        table_title {
+            base 86 211 100
+            background 0
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        table_cell_selected {
+            base 201 209 217
+            background 48 54 61
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        table_cell_unselected {
+            base 201 209 217
+            background 22 27 34
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        list_selected {
+            base 201 209 217
+            background 48 54 61
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        list_unselected {
+            base 201 209 217
+            background 22 27 34
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 86 211 100
+            emphasis_3 219 97 162
+        }
+        frame_selected {
+            base 86 211 100
+            background 0
+            emphasis_0 240 136 62
+            emphasis_1 121 192 255
+            emphasis_2 219 97 162
+            emphasis_3 0
+        }
+        frame_highlight {
+            base 240 136 62
+            background 0
+            emphasis_0 240 136 62
+            emphasis_1 240 136 62
+            emphasis_2 240 136 62
+            emphasis_3 240 136 62
+        }
+        exit_code_success {
+            base 86 211 100
+            background 0
+            emphasis_0 121 192 255
+            emphasis_1 22 27 34
+            emphasis_2 219 97 162
+            emphasis_3 108 164 248
+        }
+        exit_code_error {
+            base 247 129 102
+            background 0
+            emphasis_0 227 179 65
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
+        multiplayer_user_colors {
+            player_1 219 97 162
+            player_2 108 164 248
+            player_3 0
+            player_4 227 179 65
+            player_5 121 192 255
+            player_6 0
+            player_7 247 129 102
+            player_8 0
+            player_9 0
+            player_10 0
+        }
+    }
+}
