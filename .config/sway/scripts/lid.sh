@@ -24,7 +24,7 @@ close)
     fi
     ;;
 open)
-    swaymsg output eDP-1 enable
+    ~/.config/sway/scripts/wake-outputs.sh lid
     ;;
 sync)
     lid_closed && [ "$(externals)" != none ] && swaymsg output eDP-1 disable

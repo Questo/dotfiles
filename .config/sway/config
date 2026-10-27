@@ -260,10 +260,14 @@ bindsym $mod+Shift+n exec makoctl dismiss --all
 # Idle: warn at 4:30, lock at 5 min, screen off at 10 min,
 # suspend at 15 min (on battery only), lock before sleep.
 # Waybar's idle inhibitor (eye icon) pauses all of this.
+# Each stage logs to the journal: journalctl -t sway-idle -t sway-wake
 exec swayidle -w \
     timeout 270 'notify-send -a Idle -t 30000 -u normal "Locking in 30 seconds"' \
-    timeout 300 'swaylock -f' \
-    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    timeout 300 'logger -t sway-idle lock; swaylock -f' \
+    timeout 600 'logger -t sway-idle screen-off; swaymsg "output * power off"' \
+        resume '~/.config/sway/scripts/wake-outputs.sh idle' \
     timeout 900 '~/.config/sway/scripts/suspend-on-battery.sh' \
-    before-sleep 'swaylock -f'
+    before-sleep 'logger -t sway-idle before-sleep; swaylock -f'
 bindsym $mod+Escape exec swaylock -f
+# Emergency: screens stay black -> force all outputs on + relink externals
+bindsym --locked $mod+Ctrl+Escape exec ~/.config/sway/scripts/wake-outputs.sh hard
