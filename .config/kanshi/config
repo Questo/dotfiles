@@ -1,0 +1,21 @@
+# Output profiles, applied on every hotplug. The first profile whose outputs
+# match exactly what's connected wins. List names: swaymsg -t get_outputs
+# Docked profiles exec lid.sh sync so a closed lid keeps eDP-1 off.
+
+profile laptop {
+    output eDP-1 enable scale 2
+}
+
+# Home: Philips 34" ultrawide, laptop to its left, bottom edges aligned
+profile philips {
+    output eDP-1 enable scale 2 position 0,240
+    output "Philips Consumer Electronics Company PHL 346B1C 1322131231233" enable scale 1 position 1920,0
+    exec ~/.config/sway/scripts/lid.sh sync
+}
+
+# Any other single monitor: sway places it, kanshi only enables it
+profile docked {
+    output eDP-1 enable scale 2
+    output * enable
+    exec ~/.config/sway/scripts/lid.sh sync
+}

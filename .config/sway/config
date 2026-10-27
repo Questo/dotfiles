@@ -17,6 +17,8 @@ set $right l
 set $term ghostty
 # Your preferred application launcher
 set $menu pkill -x wofi || wofi --show drun
+# Mouse cursor size
+seat seat0 xcursor_theme Adwaita 48
 
 ### Output configuration
 #
@@ -184,16 +186,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $right resize shrink width 10px
+    bindsym $up resize grow height 10px
+    bindsym $down resize shrink height 10px
+    bindsym $left resize grow width 10px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Right resize shrink width 10px
+    bindsym Up resize grow height 10px
+    bindsym Down resize shrink height 10px
+    bindsym Left resize grow width 10px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -231,6 +233,24 @@ input type:keyboard {
     xkb_layout se
     xkb_variant nodeadkeys
 }
+
+# Touchpad: 2-finger click/tap = right click, 3-finger = middle
+input type:touchpad {
+    click_method clickfinger
+    tap enabled
+    dwt enabled
+}
+
+# Laptop lid: sway owns it, logind's lid action is inhibited while sway runs
+# (logind saw "undocked" when the monitor slept and suspended mid-dock).
+# Docked -> disable internal panel; undocked -> suspend. See scripts/lid.sh.
+exec systemd-inhibit --what=handle-lid-switch --who=sway --why="sway handles the lid" sleep infinity
+bindswitch --reload --locked lid:on exec ~/.config/sway/scripts/lid.sh close
+bindswitch --reload --locked lid:off exec ~/.config/sway/scripts/lid.sh open
+exec ~/.config/sway/scripts/lid.sh watch
+
+# Per-monitor layouts on hotplug (~/.config/kanshi/config)
+exec kanshi
 
 # Notifications (mako)
 exec mako
