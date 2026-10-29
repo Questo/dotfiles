@@ -61,6 +61,9 @@ output * bg ~/personal/pictures/astronaut-jellyfish-space-digital-art-uhdpaper.c
 #
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
+input type:pointer {
+  natural_scroll enabled
+}
 
 ### Key bindings
 #
@@ -254,6 +257,8 @@ exec kanshi
 
 # Notifications (mako)
 exec mako
+# NetworkManager secret agent: prompts for VPN passwords / Duo codes (GNOME does this itself)
+exec nm-applet --indicator
 bindsym $mod+n exec makoctl dismiss
 bindsym $mod+Shift+n exec makoctl dismiss --all
 
