@@ -34,3 +34,7 @@ format=<b>%s</b>  %b
 [app-name=Screenshot]
 max-icon-size=96
 border-color=#f5c2e7
+
+[app-name=irssi]
+border-color=#a6e3a1
+default-timeout=10000
